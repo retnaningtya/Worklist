@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kelompok.worklist">
+
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/MyTheme">
+        <activity android:name="com.kelompok.worklist.activity.InterfaceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.kelompok.worklist.activity.MainActivity">
+        </activity>
+        <activity android:name="com.kelompok.worklist.activity.ToDoActivity" />
+        <activity android:name="com.kelompok.worklist.activity.ManageCategoryActivity" />
+        <activity android:name="com.kelompok.worklist.activity.AddUpdateActivity" />
+        <activity android:name="com.kelompok.worklist.activity.HistoryActivity" /> <!-- notification broadcastreceiver -->
+        <receiver
+            android:name="com.kelompok.worklist.broadcastreceiver.AlarmReceiver"
+            android:enabled="true" /> <!-- tasklist widget -->
+
+        <service
+            android:name="com.kelompok.worklist.widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" /> <!-- counter widget -->
+        <receiver
+            android:name="com.kelompok.worklist.widget.CounterWidgetProvider"
+            android:label="@string/toDoList">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_counter_info" />
+        </receiver>
+    </application>
+
+</manifest>
